@@ -12,6 +12,7 @@ import { Avatar, Button, Card, Searchbar } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 
 import { path, windowHeight, windowWidth } from "../../utils/Vaiables";
 
@@ -59,8 +60,6 @@ const HomeScreen = ({ navigation }) => {
 
   const GetUserInfo = async () => {
     let userData = await AsyncStorage.getItem("user");
-    // console.log(userData);
-    // console.log(userData.avatar);
     setUser(JSON.parse(userData));
   };
 
@@ -80,25 +79,29 @@ const HomeScreen = ({ navigation }) => {
             }}
             style={styles.useravatar}
           />
-          <Text style={styles.usertext}>{user.firstname} {user.lastname}</Text>
+          <Text style={styles.usertext}>
+            {user.firstname} {user.lastname}
+          </Text>
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("QRcode")}
-          // onPress={() => alert("QRcode!")}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("QRcode")}>
           <MaterialCommunityIcons name="qrcode" size={35} color={"#fff"} />
         </TouchableOpacity>
       </View>
 
       <ScrollView>
         <View style={styles.mainContainer}>
-          <Searchbar
-            placeholder="Search"
-            onChangeText={(texte) => searchFilter(texte)}
-            value={search}
-            style={styles.serchinput}
-            autoCapitalize="none"
-          />
+          <View style={styles.searchContainer}>
+            <Searchbar
+              placeholder="Search"
+              onChangeText={(texte) => searchFilter(texte)}
+              value={search}
+              style={styles.serchinput}
+              autoCapitalize="none"
+            />
+            <TouchableOpacity onPress={fetchData}>
+              <EvilIcons name="refresh" size={45} color={"#159A9C"} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.mainContainer}>
           {filterData.map(
@@ -128,6 +131,7 @@ const HomeScreen = ({ navigation }) => {
               );
             }
           )}
+          <View style={{ height: windowHeight * 0.1 }} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -171,6 +175,13 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "white",
   },
+  searchContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   mainContainer: {
     width: "100%",
     paddingHorizontal: windowWidth * 0.05,
@@ -180,7 +191,8 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   serchinput: {
-    marginVertical: windowHeight * 0.05,
+    marginVertical: windowHeight * 0.03,
+    width: windowWidth * 0.7,
     borderRadius: 10,
     padding: 1,
   },

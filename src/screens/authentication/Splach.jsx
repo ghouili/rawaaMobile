@@ -10,11 +10,8 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Card } from "react-native-shadow-cards";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-// const windowWidth = Dimensions.get('window').width;
-// const windowHeight = Dimensions.get('window').height;
-import { windowHeight, windowWidth } from "../../utils/Dimensions";
+import { windowHeight, windowWidth } from "../../utils/Vaiables";
 
 const Splach = ({ navigation }) => {
   return (
@@ -34,18 +31,8 @@ const Splach = ({ navigation }) => {
           justifyContent: "center",
         }}
       >
-        {/* <Text
-          style={{
-            fontSize: 35,
-            color: "#0A66C2",
-            fontWeight: "700",
-            marginBottom: "10%",
-          }}
-        >
-          Reclamation
-        </Text> */}
         <Image
-          style={{ width: windowWidth * 0.7, resizeMode : 'contain' }}
+          style={{ width: windowWidth * 0.7, resizeMode: "contain" }}
           source={require("../../../assets/logo.png")}
         />
       </View>
@@ -71,9 +58,8 @@ const Splach = ({ navigation }) => {
         </Text>
 
         <TouchableOpacity
-          style={{  }}
-          // onPress={() => navigation.navigate('Login')}
-          onPress={() => alert("Pressed!")}
+          style={{}}
+          onPress={() => navigation.navigate("Login")}
         >
           <Card
             style={{
@@ -90,9 +76,6 @@ const Splach = ({ navigation }) => {
             </Text>
           </Card>
         </TouchableOpacity>
-
-        
-        
       </View>
     </SafeAreaView>
   );
@@ -104,7 +87,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F3F7F8",
-    
   },
   background: {
     position: "absolute",

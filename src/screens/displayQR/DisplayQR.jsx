@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,19 +8,33 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Avatar, Button, Card, Searchbar } from "react-native-paper";
 import QRCode from "react-native-qrcode-svg";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Octicons from "react-native-vector-icons/Octicons";
 
-import { windowHeight, windowWidth } from "../../utils/Dimensions";
+import { path, windowHeight, windowWidth } from "../../utils/Vaiables";
 
-const DisplayQR = () => {
+const DisplayQR = ({ navigation }) => {
+  const [user, setUser] = useState({
+    firstname: "user",
+    lastname: "user",
+    avatar: "avatar.png",
+  });
+
+  const GetUserInfo = async () => {
+    let userData = await AsyncStorage.getItem("user");
+    setUser(JSON.parse(userData));
+  };
+
+  useEffect(() => {
+    GetUserInfo();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topcontainer}>
         <TouchableOpacity
-          onPress={() => alert("Pressed!")}
+          onPress={() => navigation.goBack()}
           style={styles.iconBorder}
         >
           <Octicons name="arrow-left" size={30} />
@@ -30,19 +44,20 @@ const DisplayQR = () => {
         <View style={styles.maincard}>
           <Image
             source={{
-              uri: "https://reactjs.org/logo-og.png",
+              uri: `${path}uploads/images/${user?.avatar}`,
               cache: "only-if-cached",
             }}
             style={styles.useravatar}
           />
           <QRCode
-            value="http://awesome.link.qr"
+            value={user?._id}
             backgroundColor="transparent"
             color="white"
-            //   linearGradient=	['rgb(255,0,0)','rgb(0,255,255)']
             style={styles.qr}
           />
-          <Text style={styles.usertext}>User Name</Text>
+          <Text style={styles.usertext}>
+            {user.firstname} {user.lastname}
+          </Text>
         </View>
         <View style={styles.notecontainer}>
           <Text style={styles.notetext}>
@@ -106,7 +121,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingHorizontal: windowWidth * 0.1
+    paddingHorizontal: windowWidth * 0.1,
   },
   useravatar: {
     width: windowWidth * 0.19,

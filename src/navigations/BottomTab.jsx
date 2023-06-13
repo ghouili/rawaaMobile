@@ -7,8 +7,8 @@ import Feather from "react-native-vector-icons/Feather";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import HomeScreen from "../screens/home/HomeScreen";
-import DisplayQR from "../screens/displayQR/DisplayQR";
+import ComingSoon from "../screens/home/ComingSoon";
+import AchatNavigation from "./AchatNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ const BottomTab = () => {
     >
       <Tab.Screen
         name="Feed"
-        component={HomeScreen}
+        component={ComingSoon}
         options={{
           tabBarLabel: "Cart",
           tabBarIcon: ({ color, size }) => (
@@ -33,7 +33,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name="Tempon"
-        component={HomeScreen}
+        component={ComingSoon}
         options={{
           tabBarLabel: "Tempon",
           tabBarIcon: ({ color, size }) => (
@@ -43,7 +43,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name="Offre"
-        component={HomeScreen}
+        component={ComingSoon}
         options={{
           tabBarLabel: "Offre",
           tabBarIcon: ({ color, size }) => (
@@ -53,7 +53,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name="Gold"
-        component={DisplayQR}
+        component={AchatNavigation}
         options={{
           tabBarLabel: "Gold",
           tabBarIcon: ({ color, size }) => (
@@ -67,7 +67,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name="Settings"
-        component={HomeScreen}
+        component={ComingSoon}
         options={{
           tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
